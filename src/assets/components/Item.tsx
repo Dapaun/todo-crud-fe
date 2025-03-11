@@ -8,7 +8,7 @@ const Item = (itemProps: ItemProps) => {
     console.log("Itemprops ", itemProps);
     return (
         <div>
-            <div className="m-auto w-60 border-2 border-slate-500 rounded-lg p-2 text-lg flex justify-between">
+            <div className="m-auto mb-2 w-60 border-2 border-slate-500 rounded-lg p-2 text-lg flex justify-between">
                 <p className="text-2xl">
                     {itemProps.text}
                 </p>
