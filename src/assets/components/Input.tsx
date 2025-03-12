@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { ItemListProps } from "./ItemList";
+import { ItemProps } from "./Item";
 
-const Input = (props: ItemListProps) => {
+export interface InputProps {
+    itemList: ItemProps[];
+    setItemlist: any;
+}
+
+const Input = (props: InputProps) => {
 
     const {
         itemList,
@@ -21,14 +26,16 @@ const Input = (props: ItemListProps) => {
             isCompleted: false,
           },
         ]);
-    } 
+        setInputValue("");
+    }
 
 
     return (
-        <div className="flex justify-center mb-5 text-l ">
-            <input className="border-2 border-slate-500 mr-2"
+        <div className="flex justify-center mb-5 text-l">
+            <input className="border-2 border-slate-500 mr-2 p-1 rounded-lg"
+                placeholder="Add a new thing"
                 type="text" value={inputValue} onChange={handleChange}/>
-            <button className="border-2 border-blue-400 p-1 bg-blue-300 text-white" onClick={handleClick}>Add</button>
+            <button className="border-2 border-blue-400 p-1 bg-blue-300 text-white rounded-lg" onClick={handleClick}>Add</button>
         </div>
     )
 

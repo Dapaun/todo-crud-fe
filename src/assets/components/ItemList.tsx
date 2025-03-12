@@ -13,13 +13,19 @@ const ItemList = (props: ItemListProps) => {
         setItemlist,
     } = props;
 
+    const removeItem = (itemKey: number) => {
+        setItemlist(itemList.filter(
+            (item: ItemProps, index: number) => index !== itemKey
+        ));
+    }
+
     return (
         <div>
-            <Input itemList = {itemList} setItemlist = {setItemlist} />
+            <Input itemList = {itemList} setItemlist = {setItemlist}/>
             <ul>
                 {itemList.map((item:ItemProps, index: number) => 
                     <li key={index}>
-                        <Item {...item} />
+                        <Item {...item} removeItem = {removeItem} index={index}/>
                     </li>
                 )}
             </ul>
