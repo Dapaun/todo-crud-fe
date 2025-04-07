@@ -4,13 +4,13 @@ export interface ItemProps {
     isCompleted: boolean;
     removeItem?: any;
     index?: any;
+    id?: number;
 }
 
 const Item = (itemProps: ItemProps) => {
-    console.log("Itemprops ", itemProps);
 
     const handleRemove = (index: number) => {
-        itemProps.removeItem(index);
+        itemProps.removeItem(index, itemProps.id);
     }
 
     return (

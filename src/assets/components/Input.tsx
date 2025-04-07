@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ItemProps } from "./Item";
+import { BASE_PATH } from "../../App";
 
 export interface InputProps {
     itemList: ItemProps[];
@@ -7,7 +8,6 @@ export interface InputProps {
 }
 
 const Input = (props: InputProps) => {
-
     const {
         itemList,
         setItemlist,
@@ -20,7 +20,23 @@ const Input = (props: InputProps) => {
     } 
 
     const handleClick = () => {
-        console.log("Clicked ", inputValue);
+        fetch(BASE_PATH + "item", {
+            headers: {
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            method: "POST",
+            body: JSON.stringify({
+                text: inputValue,
+                isCompleted: false,
+              })
+        })
+            .then((response: any) => response.json())
+            .then((data: any) =>
+                setItemlist([...itemList, data,
+                ])
+            );
+
         setItemlist([...itemList, {
             text: inputValue,
             isCompleted: false,

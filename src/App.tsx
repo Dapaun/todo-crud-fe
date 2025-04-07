@@ -2,25 +2,22 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { ItemProps } from './assets/components/Item';
 import ItemList from './assets/components/ItemList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const itemList: ItemProps[] = [
-  {
-    text: "First item",
-    isCompleted: false,
-  },
-  {
-    text: "Second item",
-    isCompleted: true,
-  },
-  {
-    text: "Learn more",
-    isCompleted: true,
-  }
-];
+export const BASE_PATH = "http://localhost:8080/api/";
 
 function App() {
-  const [items, setItems] = useState(itemList);
+  const [items, setItems] = useState<ItemProps[]>([]);
+
+  const fetchItems = () => {
+    fetch(BASE_PATH + "items")
+      .then((response: any) => response.json())
+      .then((data: ItemProps[]) => setItems(data));
+  }
+
+  useEffect(() => {
+    fetchItems();
+  }, [])
 
   return (
     <>

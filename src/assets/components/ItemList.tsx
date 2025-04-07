@@ -1,3 +1,4 @@
+import { BASE_PATH } from "../../App";
 import Input from "./Input";
 import Item, { ItemProps } from "./Item"
 
@@ -13,10 +14,18 @@ const ItemList = (props: ItemListProps) => {
         setItemlist,
     } = props;
 
-    const removeItem = (itemKey: number) => {
-        setItemlist(itemList.filter(
-            (item: ItemProps, index: number) => index !== itemKey
-        ));
+    const removeItem = (itemKey: number, id: number) => {
+        fetch(BASE_PATH + `item/${id}`, {
+            method: "DELETE",
+        })
+            .then((response: any) => response)
+            .then((data: any) =>  {
+                if (data.status === 200) {
+                    setItemlist(itemList.filter(
+                        (item: ItemProps, index: number) => index !== itemKey
+                    ));
+                }
+            })
     }
 
     return (
